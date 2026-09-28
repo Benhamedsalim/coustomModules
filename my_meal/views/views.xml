@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+        <record id="partners_meals_form_view" model="ir.ui.view">
+            <field name="model">partners.meals</field>
+            <field name="name">partners.partners_meals_form_view</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="meal_name"/>
+                        <field name="partner_id"/>
+                        <field name="meal_datetime"/>
+                        <field name="meal_note"/>
+                    </group>
+                    <notebook>
+                        <page name="meals items" string="الوجبات">
+                            <field name="item_ids" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="meals_number"/>
+                                    <field name="product_price"/>
+                                    <field name="calories"/>
+                                    <field name="weight"/>
+                                    <field name="meal_item_price"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="total_price"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="partners_meals_tree_view" model="ir.ui.view">
+            <field name="model">partners.meals</field>
+            <field name="name">partners.partners_meals_tree_view</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="meal_name"/>
+                    <field name="partner_id"/>
+                    <field name="meal_datetime"/>
+                    <field name="meal_note"/>
+                    <field name="total_price"/>
+                </tree>
+            </field>
+        </record>
+        <record id="all_meal_action" model="ir.actions.act_window">
+            <field name="name">جميع الوجبات</field>
+            <field name="res_model">partners.meals</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    لايوجد وجبات لإظهارها
+                </p><p>قم بالضغط على زر جديد في الأعلى وذلك من أجل إظافة وجبة جديدة</p>
+            </field>
+        </record>
+        <!-- action fot breakfast  -->
+        <record id="breakfast_meal_action" model="ir.actions.act_window">
+            <field name="name">وجبات الفطور</field>
+            <field name="res_model">partners.meals</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{
+                'search_default_filter_to_breakfast':1
+                }</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    لايوجد وجبات فطور
+                </p><p>قم بالضغط على زر جديد في الأعلى وذلك من أجل إظافة وجبة جديدة</p>
+            </field>
+        </record>
+        <!-- action fot lunch  -->
+        <record id="lunch_meal_action" model="ir.actions.act_window">
+            <field name="name">وجبات الغداء</field>
+            <field name="res_model">partners.meals</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{
+                'search_default_filter_to_lunch':1
+                }</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    لايوجد وجبات غداء
+                </p><p>قم بالضغط على زر جديد في الأعلى وذلك من أجل إظافة وجبة جديدة</p>
+            </field>
+        </record>
+        <!-- action fot dinner  -->
+        <record id="dinner_meal_action" model="ir.actions.act_window">
+            <field name="name">وجبات العشاء</field>
+            <field name="res_model">partners.meals</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{
+                'search_default_filter_to_dinner':1
+                }</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    لايوجد وجبات عشاء
+                </p><p>قم بالضغط على زر جديد في الأعلى وذلك من أجل إظافة وجبة جديدة</p>
+            </field>
+        </record>
+        <record id="partners_meals_search_view" model="ir.ui.view">
+            <field name="model">partners.meals</field>
+            <field name="name">partners.partners_meals_search_view</field>
+            <field name="arch" type="xml">
+                <search string="Meals">
+                    <filter name="filter_to_breakfast" string="وجبات الفطور" domain="[('meal_name', '=', 'breakfast')]"/>
+                    <filter name="filter_to_lunch" string="وجبات الغداء" domain="[('meal_name', '=', 'lunch')]"/>
+                    <filter name="filter_to_dinner" string="وجبات العشاء" domain="[('meal_name', '=', 'dinner')]"/>
+                </search>
+            </field>
+        </record>
+
+        <menuitem
+            name="وجباتي"
+            id="my_meal_root_menu"
+            />
+        <menuitem
+            name="وجبات العملاء"
+            id="my_meal_partner_menu"
+            parent="my_meal_root_menu"
+            />
+        <menuitem
+            name="جميع الوجبات"
+            id="my_meal_all_meal_menu"
+            parent="my_meal_partner_menu"
+            action="all_meal_action"
+            />
+        <menuitem
+            name="وجبات الفطور"
+            id="my_meal_breakfast_menu"
+            parent="my_meal_partner_menu"
+            action="breakfast_meal_action"
+            />
+        <menuitem
+            name="وجبات الغداء"
+            id="my_meal_lunch_menu"
+            parent="my_meal_partner_menu"
+            action="lunch_meal_action"
+            />
+        <menuitem
+            name="وجبات العشاء"
+            id="my_meal_dinner_menu"
+            parent="my_meal_partner_menu"
+            action="dinner_meal_action"
+            />
+    </data>
+</odoo>
