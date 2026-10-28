@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension">
+        <xpath expr="//button[contains(@class, 'pay')]" position="before">
+            <div class="quick-pay-buttons">
+                <button class="button btn btn-success btn-lg w-100 mb-1"
+                        t-on-click="() => this.quickPay('Cash')">
+                    💵 نقدي (F4)
+                </button>
+                <button class="button btn btn-info btn-lg w-100 mb-1"
+                        t-on-click="() => this.quickPay('Bank')">
+                    💳 بنكي (F6)
+                </button>
+                <button class="button btn btn-warning btn-lg w-100 mb-1"
+                        t-on-click="() => this.quickPay('Customer Account')">
+                    📝 على الحساب (F8)
+                </button>
+            </div>
+        </xpath>
+    </t>
+</templates>
